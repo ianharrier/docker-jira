@@ -31,6 +31,7 @@ services:
             - POSTGRES_DB=${DB_POSTGRES_DB}
             - POSTGRES_USER=${DB_POSTGRES_USER}
             - POSTGRES_PASSWORD=${DB_POSTGRES_PASSWORD}
+            - POSTGRES_INITDB_ARGS=--encoding=UNICODE --lc-collate=C --lc-ctype=C
         volumes:
             - ./volumes/db/data:/var/lib/postgresql/data
     backup:
