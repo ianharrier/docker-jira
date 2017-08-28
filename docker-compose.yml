@@ -21,6 +21,8 @@ services:
             - PROXY_HOSTNAME=${WEB_PROXY_HOSTNAME}
             - PROXY_PORT=${WEB_PROXY_PORT}
             - PROXY_SCHEME=${WEB_PROXY_SCHEME}
+            - JVM_MINIMUM_MEMORY=${JVM_MINIMUM_MEMORY}
+            - JVM_MAXIMUM_MEMORY=${JVM_MAXIMUM_MEMORY}
             - TIMEZONE=${TIMEZONE}
         volumes:
             - ./volumes/web/data:/var/atlassian/application-data/jira

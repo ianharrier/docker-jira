@@ -13,6 +13,16 @@ if [ "$PROXY_HOSTNAME" -a "$PROXY_PORT" -a "$PROXY_SCHEME" ]; then
     fi
 fi
 
+if [ "$JVM_MINIMUM_MEMORY" ]; then
+    echo "[I] Setting JVM_MINIMUM_MEMORY."
+    sed -i "s/^JVM_MINIMUM_MEMORY=.*/JVM_MINIMUM_MEMORY=\"$JVM_MINIMUM_MEMORY\"/g" ${JIRA_INSTALL}/bin/setenv.sh
+fi
+
+if [ "$JVM_MAXIMUM_MEMORY" ]; then
+    echo "[I] Setting JVM_MAXIMUM_MEMORY."
+    sed -i "s/^JVM_MAXIMUM_MEMORY=.*/JVM_MAXIMUM_MEMORY=\"$JVM_MAXIMUM_MEMORY\"/g" ${JIRA_INSTALL}/bin/setenv.sh
+fi
+
 if [ "$TIMEZONE" ]; then
     echo "[I] Setting the time zone."
     cp "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
