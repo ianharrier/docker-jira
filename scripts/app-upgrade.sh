@@ -25,7 +25,7 @@ echo "=== Updating environment file. ===========================================
 OLD_JIRA_VERSION=$(grep ^JIRA_VERSION= .env | cut -d = -f 2)
 NEW_JIRA_VERSION=$(grep ^JIRA_VERSION= .env.template | cut -d = -f 2)
 echo "[I] Upgrading JIRA from '$OLD_JIRA_VERSION' to '$NEW_JIRA_VERSION'."
-sed -i .bak "s/^JIRA_VERSION=.*/JIRA_VERSION=$NEW_JIRA_VERSION/g" .env
+sed -i.bak "s/^JIRA_VERSION=.*/JIRA_VERSION=$NEW_JIRA_VERSION/g" .env
 
 echo "=== Building new images. ======================================================="
 docker-compose build --pull
