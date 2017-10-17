@@ -26,6 +26,11 @@ NEW_JIRA_VERSION=$(grep ^JIRA_VERSION= .env.template | cut -d = -f 2)
 echo "[I] Upgrading JIRA from '$OLD_JIRA_VERSION' to '$NEW_JIRA_VERSION'."
 sed -i.bak "s/^JIRA_VERSION=.*/JIRA_VERSION=$NEW_JIRA_VERSION/g" .env
 
+echo "=== Deleting old images. ======================================================="
+IMAGE_BACKUP=$(docker images ianharrier/jira-backup -q)
+IMAGE_WEB=$(docker images ianharrier/jira -q)
+docker rmi $IMAGE_BACKUP $IMAGE_WEB
+
 echo "=== Building new images. ======================================================="
 docker-compose build --pull
 
