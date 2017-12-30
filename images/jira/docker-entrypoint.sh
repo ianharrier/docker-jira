@@ -1,9 +1,11 @@
 #!/bin/sh
 set -e
 
-echo "[I] Setting permissions on JIRA home directory."
-chown -R ${RUN_USER}:${RUN_GROUP}  "${JIRA_HOME}"
-chmod -R u=rwx,go-rwx              "${JIRA_HOME}"
+if [ "$TIMEZONE" ]; then
+    echo "[I] Setting the time zone."
+    ln -sf "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
+    echo "$TIMEZONE" > /etc/timezone
+fi
 
 if [ "$PROXY_HOSTNAME" -a "$PROXY_PORT" -a "$PROXY_SCHEME" ]; then
     PROXY_STRING="proxyName=\"$PROXY_HOSTNAME\" proxyPort=\"$PROXY_PORT\" scheme=\"$PROXY_SCHEME\""
@@ -23,11 +25,9 @@ if [ "$JVM_MAXIMUM_MEMORY" ]; then
     sed -i "s/^JVM_MAXIMUM_MEMORY=.*/JVM_MAXIMUM_MEMORY=\"$JVM_MAXIMUM_MEMORY\"/g" ${JIRA_INSTALL}/bin/setenv.sh
 fi
 
-if [ "$TIMEZONE" ]; then
-    echo "[I] Setting the time zone."
-    ln -sf "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
-    echo "$TIMEZONE" > /etc/timezone
-fi
+echo "[I] Setting permissions on JIRA home directory."
+chown -R ${RUN_USER}:${RUN_GROUP}  "${JIRA_HOME}"
+chmod -R u=rwx,go-rwx              "${JIRA_HOME}"
 
 echo "[I] Entrypoint tasks complete. Starting JIRA."
 exec gosu ${RUN_USER} "$@"
