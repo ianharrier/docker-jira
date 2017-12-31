@@ -25,7 +25,7 @@ services:
             - JVM_MAXIMUM_MEMORY=${JVM_MAXIMUM_MEMORY}
             - TIMEZONE=${TIMEZONE}
         volumes:
-            - ./volumes/web/data:/var/atlassian/application-data/jira
+            - ./volumes/web/data:/var/atlassian/application-data/jira:Z
     db:
         image: postgres:9.6-alpine
         restart: unless-stopped
@@ -35,7 +35,7 @@ services:
             - POSTGRES_PASSWORD=${DB_POSTGRES_PASSWORD}
             - POSTGRES_INITDB_ARGS=--encoding=UNICODE --lc-collate=C --lc-ctype=C
         volumes:
-            - ./volumes/db/data:/var/lib/postgresql/data
+            - ./volumes/db/data:/var/lib/postgresql/data:Z
     backup:
         build:
             context: ./images/backup
@@ -55,3 +55,5 @@ services:
         volumes:
             - ./:${PWD}
             - /var/run/docker.sock:/var/run/docker.sock
+        security_opt:
+            - label:disable
