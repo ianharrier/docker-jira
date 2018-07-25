@@ -31,6 +31,7 @@ The JIRA image in this repo uses Oracle's JRE, which is a [supported platform](h
     * [Docker](https://docs.docker.com/engine/installation/)
     * [Docker Compose](https://docs.docker.com/compose/install/) **Warning: [installing as a container](https://docs.docker.com/compose/install/#install-as-a-container) is not supported.**
     * `git`
+    * `tar`
 
 2. Clone this repo to a location on your system. *Note: in all of the guides on this page, it is assumed the repo is cloned to `/srv/docker/jira`.*
 
@@ -95,7 +96,7 @@ The JIRA image in this repo uses Oracle's JRE, which is a [supported platform](h
 2. Run the backup script.
 
     ```shell
-    docker-compose exec backup app-backup
+    docker-compose exec cron app-backup
     ```
 
 ### Restoring from a backup
@@ -108,28 +109,22 @@ The JIRA image in this repo uses Oracle's JRE, which is a [supported platform](h
     cd /srv/docker/jira
     ```
 
-2. Make sure the **backup** container is running. *Note: if the container is already running, you can skip this step, but it will not hurt to run it anyway.*
-
-    ```shell
-    docker-compose up -d backup
-    ```
-
-3. List the available files in the `backups` directory.
+2. List the available files in the `backups` directory.
 
     ```shell
     ls -l backups
     ```
 
-4. Specify a file to restore in the following format:
+3. Specify a file to restore in the following format:
 
     ```shell
-    docker-compose exec backup app-restore <backup-file-name>
+    ./scripts/app-restore.sh <backup-file-name>
     ```
 
     For example:
 
     ```shell
-    docker-compose exec backup app-restore 20170501T031500+0000.tar.gz
+    ./scripts/app-restore.sh 20170501T031500+0000.tar.gz
     ```
 
 ### Uninstalling
