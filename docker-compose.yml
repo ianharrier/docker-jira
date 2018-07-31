@@ -39,7 +39,7 @@ services:
     cron:
         build:
             context: ./images/cron
-        image: ianharrier/jira-cron:1.1.0
+        image: ianharrier/jira-cron:1.1.1
         restart: unless-stopped
         environment:
             - BACKUP_OPERATION=${BACKUP_OPERATION}
