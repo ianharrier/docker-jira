@@ -6,7 +6,6 @@ services:
             context: ./images/jira
             args:
                 - JIRA_VERSION=${JIRA_VERSION}
-                - GOSU_VERSION=1.10
                 - JAVA_VERSION=8
                 - JAVA_UPDATE=181
                 - JAVA_BUILD=13
