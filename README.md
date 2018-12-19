@@ -18,7 +18,7 @@ This repo uses [Docker](https://www.docker.com) and [Docker Compose](https://doc
 
 This is more than just a JIRA image. Included in this repo is everything you need to get JIRA up and running as quickly as possible and a **pre-configured backup and restoration solution** that is compliant with Atlassian's [production backup recommendations](https://confluence.atlassian.com/adminjiraserver073/backing-up-data-861253815.html).
 
-The JIRA image in this repo uses Oracle's JRE, which is a [supported platform](https://confluence.atlassian.com/adminjiraserver073/supported-platforms-861253018.html).
+The JIRA image in this repo uses AdoptOpenJDK, which is a [supported platform](https://confluence.atlassian.com/adminjiraserver/supported-platforms-938846830.html).
 
 ## How-to guides
 
