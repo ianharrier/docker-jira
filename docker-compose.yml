@@ -7,8 +7,8 @@ services:
             args:
                 - JIRA_VERSION=${JIRA_VERSION}
                 - JAVA_VERSION=8
-                - JAVA_UPDATE=192
-                - JAVA_BUILD=12
+                - JAVA_UPDATE=202
+                - JAVA_BUILD=08
         image: ianharrier/jira:${JIRA_VERSION}
         restart: unless-stopped
         depends_on:
